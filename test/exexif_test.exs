@@ -69,6 +69,11 @@ defmodule ExexifTest do
     assert {:ok, _metadata} = exif_from_jpeg_buffer(@data)
   end
 
+  test "handles exif (with malformed exif)" do
+    {:ok, metadata} = exif_from_jpeg_buffer(File.read!("test/images/no_orientation.jpg"))
+    assert metadata == %{}
+  end
+
   test "tiff fields are reasonable" do
     {:ok, metadata} = exif_from_jpeg_buffer(@data)
 
